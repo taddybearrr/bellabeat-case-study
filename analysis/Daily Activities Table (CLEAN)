@@ -1,0 +1,74 @@
+--Exploring the dailyActivities table.
+SELECT *
+FROM `oos-da-project.fitbit_data.dailyActivity_merged`
+LIMIT 100
+
+
+SELECT *
+FROM `oos-da-project.fitbit_data.dailyActivity_merged`
+WHERE LoggedActivitiesDistance = 0
+--Seems like "LoggedActivitiesDistance" contain many 0s. 
+--May be an indication that only a small number of users manually log their activities.
+
+--Summarizing activity data by day for each user.
+--Rounded all decimal numbers to the nearest hundredth.
+SELECT 
+    Id,
+    ActivityDate,
+    SUM(TotalSteps) AS TotalSteps,
+    SUM(ROUND(TotalDistance, 2)) AS TotalDistance,
+    SUM(ROUND(TrackerDistance, 2)) AS TrackerDistance,
+    SUM(ROUND(VeryActiveDistance, 2)) AS VeryActiveDistance,
+    SUM(ROUND(ModeratelyActiveDistance, 2)) AS ModeratelyActiveDistance,
+    SUM(ROUND(LightActiveDistance, 2)) AS LightActiveDistance,
+    SUM(ROUND(SedentaryActiveDistance, 2)) AS SedentaryActiveDistance,
+    SUM(VeryActiveMinutes) AS VeryActiveMinutes,
+    SUM(FairlyActiveMinutes) AS FairlyActiveMinutes,
+    SUM(LightlyActiveMinutes) AS LightlyActiveMinutes,
+    SUM(SedentaryMinutes) AS SedentaryMinutes,
+    SUM(Calories) AS TotalCaloriesBurned
+FROM `oos-da-project.fitbit_data.dailyActivity_merged`
+GROUP BY Id, ActivityDate
+ORDER BY Id, ActivityDate;
+
+--Storing this aggregated, clean data in a new table
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_activity_summary` AS
+SELECT 
+    Id,
+    ActivityDate,
+    SUM(TotalSteps) AS TotalSteps,
+    ROUND(SUM(TotalDistance), 2) AS TotalDistance,
+    ROUND(SUM(TrackerDistance), 2) AS TrackerDistance,
+    ROUND(SUM(LoggedActivitiesDistance), 2) AS LoggedActivitiesDistance,
+    ROUND(SUM(VeryActiveDistance), 2) AS VeryActiveDistance,
+    ROUND(SUM(ModeratelyActiveDistance), 2) AS ModeratelyActiveDistance,
+    ROUND(SUM(LightActiveDistance), 2) AS LightActiveDistance,
+    SUM(VeryActiveMinutes) AS VeryActiveMinutes,
+    SUM(FairlyActiveMinutes) AS FairlyActiveMinutes,
+    SUM(LightlyActiveMinutes) AS LightlyActiveMinutes,
+    SUM(SedentaryMinutes) AS SedentaryMinutes,
+    SUM(Calories) AS TotalCaloriesBurned
+FROM `oos-da-project.fitbit_data.dailyActivity_merged`
+GROUP BY Id, ActivityDate
+ORDER BY Id, ActivityDate;
+
+--Storing data for the month of May.
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_activity_summary_may` AS 
+SELECT
+    Id,
+    ActivityDate,
+    SUM(TotalSteps) AS TotalSteps,
+    ROUND(SUM(TotalDistance), 2) AS TotalDistance,
+    ROUND(SUM(TrackerDistance), 2) AS TrackerDistance,
+    ROUND(SUM(LoggedActivitiesDistance), 2) AS LoggedActivitiesDistance,
+    ROUND(SUM(VeryActiveDistance), 2) AS VeryActiveDistance,
+    ROUND(SUM(ModeratelyActiveDistance), 2) AS ModeratelyActiveDistance,
+    ROUND(SUM(LightActiveDistance), 2) AS LightActiveDistance,
+    SUM(VeryActiveMinutes) AS VeryActiveMinutes,
+    SUM(FairlyActiveMinutes) AS FairlyActiveMinutes,
+    SUM(LightlyActiveMinutes) AS LightlyActiveMinutes,
+    SUM(SedentaryMinutes) AS SedentaryMinutes,
+    SUM(Calories) AS TotalCaloriesBurned
+FROM `oos-da-project.fitbit_data.dailyActivity_may`
+GROUP BY Id, ActivityDate
+ORDER BY Id, ActivityDate;
