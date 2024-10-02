@@ -1,0 +1,46 @@
+--Combining Sleep Data
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_sleep_summary_combined` AS
+SELECT * FROM `oos-da-project.fitbit_data.daily_sleep_summary`
+UNION ALL
+SELECT * FROM `oos-da-project.fitbit_data.daily_sleep_summary_may`;
+
+--Combining Daily Activity Data
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_activity_summary_combined` AS
+SELECT * FROM `oos-da-project.fitbit_data.daily_activity_summary`
+UNION ALL
+SELECT * FROM `oos-da-project.fitbit_data.daily_activity_summary_may`;
+
+--Combining all heart rate summary tables into one.
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_heart_rate_summary_combined` AS
+SELECT * FROM `oos-da-project.fitbit_data.daily_heart_rate_summary`
+UNION ALL
+SELECT * FROM `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part1`
+UNION ALL
+SELECT * FROM `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part2`
+UNION ALL
+SELECT * FROM `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part3`
+UNION ALL
+SELECT * FROM `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part4`;
+
+--Combining all the datasets (sleep, activity, and heart rate) including March to May in one table to explore further analysis.
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_combined_summary_apr_may` AS
+SELECT 
+    activity.Id,
+    activity.ActivityDate AS Date, -- Renamed column to represent all data across different sources.
+    activity.TotalSteps,
+    activity.TotalDistance,
+    activity.VeryActiveMinutes,
+    activity.FairlyActiveMinutes,
+    activity.LightlyActiveMinutes,
+    activity.SedentaryMinutes,
+    activity.TotalCaloriesBurned,
+    sleep.TotalMinutesAsleep,
+    sleep.TotalMinutesRestless,
+    sleep.TotalMinutesAwake,
+    heart_rate.AvgDailyHeartRate
+FROM `oos-da-project.fitbit_data.daily_activity_summary_combined` AS activity
+LEFT JOIN `oos-da-project.fitbit_data.daily_sleep_summary_combined` AS sleep
+    ON activity.Id = sleep.Id AND activity.ActivityDate = sleep.SleepDay
+LEFT JOIN `oos-da-project.fitbit_data.daily_heart_rate_summary_combined` AS heart_rate
+    ON activity.Id = heart_rate.Id AND activity.ActivityDate = heart_rate.HeartRateDate
+ORDER BY activity.Id, Date;
