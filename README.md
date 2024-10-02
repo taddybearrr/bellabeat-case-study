@@ -14,7 +14,7 @@ This project is a data analysis case study for Bellabeat, a high-tech company fo
 This case study explores Fitbit's user data from April and May 2016, focusing on the relationship between user activity (steps), sleep, and heart rate. The goal is to identify key trends and provide actionable recommendations for improving Bellabeat's product features, particularly in terms of recovery and cardiovascular health.
 
 ## Data Sources
-The data used for this analysis comes from Fitbit's publically available dataset on Kaggle. It includes:
+The data used for this analysis comes from Fitbit's publically available dataset on [Kaggle](https://www.kaggle.com/datasets/arashnic/fitbit). It includes:
 Fitabase Data 3.12.16-4.11.16
 - dailyActivity_merged.csv
 - heartrate_seconds_merged.csv
@@ -46,9 +46,6 @@ Fitabase Data 4.12.16-5.12.16
 - minuteStepsWide_merged
 - sleepDay_merged
 - weightLogInfo_merged
-- **Activity Data**: Daily step counts, active minutes, and calories burned.
-- **Sleep Data**: Sleep duration and quality metrics.
-- **Heart Rate Data**: Daily average heart rate for users.
 
 ## Analysis
 The analysis used SQL queries in Google BigQuery to clean, aggregate, and explore the data. Key analyses include:
