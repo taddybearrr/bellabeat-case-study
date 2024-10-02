@@ -1,0 +1,44 @@
+----ANALYSIS PHASE----
+--Finding correlation between activity and sleep. Checking if higher activity levels impact sleep duration or quality.
+SELECT 
+    Id,
+    ROUND(AVG(TotalSteps), 2) AS AvgDailySteps,
+    ROUND(AVG(TotalMinutesAsleep), 2) AS AvgDailySleepMinutes
+FROM `oos-da-project.fitbit_data.daily_combined_summary_apr_may`
+WHERE TotalMinutesAsleep IS NOT NULL
+GROUP BY Id
+ORDER BY AvgDailySteps DESC;
+
+--Checking if heart rate fluctuates based on daily activity levels.
+SELECT
+    Id,
+    ROUND(AVG(TotalSteps), 2) AS AvgSteps,
+    Round(AVG(AvgDailyHeartRate), 2) AS AvgHeartRate
+FROM `oos-da-project.fitbit_data.daily_combined_summary_apr_may`
+WHERE AvgDailyHeartRate IS NOT NULL
+GROUP BY Id
+ORDER BY AvgSteps DESC;
+
+--Checking if sleep affects heart rate levels.
+SELECT 
+    Id,
+    ROUND(AVG(TotalMinutesAsleep), 2) AS AvgDailySleepMinutes,
+    ROUND(AVG(AvgDailyHeartRate), 2) AS AvgHeartRate
+FROM `oos-da-project.fitbit_data.daily_combined_summary_apr_may`
+WHERE TotalMinutesAsleep IS NOT NULL AND AvgDailyHeartRate IS NOT NULL
+GROUP BY Id
+ORDER BY AvgDailySleepMinutes DESC;
+
+--Checking users who are particularly active and see how their sleep and heart rates compare.
+SELECT 
+    Id,
+    ROUND(AVG(TotalSteps), 2) AS AvgDailySteps,
+    ROUND(AVG(TotalMinutesAsleep), 2) AS AvgDailySleepMinutes,
+    ROUND(AVG(AvgDailyHeartRate), 2) AS AvgHeartRate
+FROM `oos-da-project.fitbit_data.daily_combined_summary_apr_may`
+WHERE TotalMinutesAsleep IS NOT NULL
+    AND AvgDailyHeartRate IS NOT NULL
+GROUP BY Id
+HAVING AvgDailySteps > 10000  --HAVING clause was necessary in order to return the right users after aggregation process.
+ORDER BY AvgDailySteps DESC;
+
