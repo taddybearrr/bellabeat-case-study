@@ -1,0 +1,108 @@
+--Exploring and Cleaning Sleep Data
+SELECT * 
+FROM `oos-da-project.fitbit_data.minuteSleep_merged` 
+
+--Counting Number of Sleep Entries per User
+SELECT Id, COUNT(date) AS NumSleepEntries 
+FROM `oos-da-project.fitbit_data.minuteSleep_merged` 
+GROUP BY Id 
+ORDER BY Id;
+
+--Explore Sleep Entries in Detail for One Individual
+SELECT 
+    Id,
+    logId,
+    COUNT(CASE WHEN Value = 1 THEN 1 END) AS TotalMinutesAsleep,
+    COUNT(CASE WHEN Value = 2 THEN 1 END) AS TotalMinutesRestless,
+    COUNT(CASE WHEN Value = 3 THEN 1 END) AS TotalMinutesAwake
+FROM `oos-da-project.fitbit_data.minuteSleep_merged`
+WHERE Id = 1503960366
+GROUP BY Id, logId;
+
+--Calculate sleep duration and identify potential discrepancies when start and end of sleep cycle were not the same
+SELECT 
+    Id, 
+    logId,
+    CAST(MIN(date) AS DATE) AS startDATE, -- Get the earliest date (start of sleep)
+    CAST(MIN(date) AS TIME) AS startTime, -- Get the earliest time (start time)
+    CAST(MAX(date) AS DATE) AS endDATE, -- Get the latest date (end of sleep)
+    CAST(MAX(date) AS TIME) AS endTime, -- Get the latest time (end time)
+    AVG(CAST(Value AS DECIMAL)) AS AvgValue,
+    CAST(DATE_DIFF(MAX(date), MIN(date), MINUTE) AS DECIMAL)/60 AS TotalSleepHrs -- Calculate total sleep hours
+FROM `oos-da-project.fitbit_data.minuteSleep_merged`
+GROUP BY Id, logId
+ORDER BY Id, logId;
+--Query results showed that some users have multiple log entries on the same day.
+
+--Aggregating the TotalSleepHrs for the days in which individuals have multiple sleep sessions in one day.
+--Need to use a subquery to sum up all the durations of all sessions on the same day. 
+--Also added sum of all values counted for all sessions on the same day.
+WITH SleepSessions AS (
+    SELECT 
+        Id,
+        CAST(MIN(date) AS DATE) AS SleepDay,
+        COUNT(CASE WHEN Value = 1 THEN 1 END) AS MinutesAsleep,
+        COUNT(CASE WHEN Value = 2 THEN 1 END) AS MinutesRestless,
+        COUNT(CASE WHEN Value = 3 THEN 1 END) AS MinutesAwake,
+        CAST(DATE_DIFF(MAX(date), MIN(date), MINUTE) AS DECIMAL)/60 AS SleepDuration
+    FROM `oos-da-project.fitbit_data.minuteSleep_merged`
+    GROUP BY Id, logId
+)
+SELECT 
+    Id, 
+    SleepDay, 
+    SUM(MinutesAsleep) AS TotalMinutesAsleep,
+    SUM(MinutesRestless) AS TotalMinutesRestless,
+    SUM(MinutesAwake) AS TotalMinutesAwake,
+    SUM(SleepDuration) AS TotalSleepHrs
+FROM SleepSessions
+GROUP BY Id, SleepDay
+ORDER BY Id, SleepDay;
+
+--Storing this aggregated, clean data in a new table
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_sleep_summary` AS
+WITH SleepSessions AS (
+    SELECT 
+        Id,
+        CAST(MIN(date) AS DATE) AS SleepDay,
+        COUNT(CASE WHEN Value = 1 THEN 1 END) AS MinutesAsleep,
+        COUNT(CASE WHEN Value = 2 THEN 1 END) AS MinutesRestless,
+        COUNT(CASE WHEN Value = 3 THEN 1 END) AS MinutesAwake,
+        CAST(DATE_DIFF(MAX(date), MIN(date), MINUTE) AS DECIMAL)/60 AS SleepDuration
+    FROM `oos-da-project.fitbit_data.minuteSleep_merged`
+    GROUP BY Id, logId
+)
+SELECT 
+    Id, 
+    SleepDay, 
+    SUM(MinutesAsleep) AS TotalMinutesAsleep,
+    SUM(MinutesRestless) AS TotalMinutesRestless,
+    SUM(MinutesAwake) AS TotalMinutesAwake,
+    ROUND(SUM(SleepDuration), 2) AS TotalSleepHrs --Calculations had to rounded for easy viewing.
+FROM SleepSessions
+GROUP BY Id, SleepDay
+ORDER BY Id, SleepDay;
+
+--Doing the same thing for the data on the month of May.
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_sleep_summary_may` AS
+WITH SleepSessions AS (
+    SELECT 
+        Id,
+        CAST(MIN(date) AS DATE) AS SleepDay,
+        COUNT(CASE WHEN Value = 1 THEN 1 END) AS MinutesAsleep,
+        COUNT(CASE WHEN Value = 2 THEN 1 END) AS MinutesRestless,
+        COUNT(CASE WHEN Value = 3 THEN 1 END) AS MinutesAwake,
+        CAST(DATE_DIFF(MAX(date), MIN(date), MINUTE) AS DECIMAL)/60 AS SleepDuration
+    FROM `oos-da-project.fitbit_data.minuteSleep_may`
+    GROUP BY Id, logId
+)
+SELECT 
+    Id, 
+    SleepDay, 
+    SUM(MinutesAsleep) AS TotalMinutesAsleep,
+    SUM(MinutesRestless) AS TotalMinutesRestless,
+    SUM(MinutesAwake) AS TotalMinutesAwake,
+    ROUND(SUM(SleepDuration),2) AS TotalSleepHrs --Calculations had to rounded for easy viewing.
+FROM SleepSessions
+GROUP BY Id, SleepDay
+ORDER BY Id, SleepDay;
