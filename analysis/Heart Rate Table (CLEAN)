@@ -1,0 +1,63 @@
+--Exploring heart rate data
+SELECT *
+FROM `oos-da-project.fitbit_data.heartrate_seconds_merged`
+LIMIT 100;
+
+
+--Summarizing heart rate data by day for each user.
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_heart_rate_summary` AS
+SELECT 
+    Id,
+    CAST(TIME AS DATE) AS HeartRateDate,
+    ROUND(AVG(Value), 2) AS AvgDailyHeartRate
+FROM `oos-da-project.fitbit_data.heartrate_seconds_merged`
+GROUP BY Id, HeartRateDate
+ORDER BY Id, HeartRateDate;
+
+--Summarizing heart rate data for May.
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_heart_rate_summary_may` AS
+SELECT 
+    Id,
+    CAST(TIME AS DATE) AS HeartRateDate,
+    ROUND(AVG(Value), 2) AS AvgDailyHeartRate
+FROM `oos-da-project.fitbit_data.heartrate_seconds_may`
+GROUP BY Id, HeartRateDate
+ORDER BY Id, HeartRateDate;
+
+--^ Query above is too large for Google Sheets to handle during execution process.
+--Will try in 2 batches first by separating them in weeks, then aggregate them together after.
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part1` AS
+SELECT 
+    Id,
+    CAST(TIME AS DATE) AS HeartRateDate,
+    ROUND(AVG(Value), 2) AS AvgDailyHeartRate
+FROM `oos-da-project.fitbit_data.heartrate_seconds_may`
+WHERE DATE(TIME) BETWEEN '2016-04-12' AND '2016-04-18'
+GROUP BY Id, HeartRateDate;
+
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part2` AS
+SELECT 
+    Id,
+    CAST(TIME AS DATE) AS HeartRateDate,
+    ROUND(AVG(Value), 2) AS AvgDailyHeartRate
+FROM `oos-da-project.fitbit_data.heartrate_seconds_may`
+WHERE DATE(TIME) BETWEEN '2016-04-19' AND '2016-04-25'
+GROUP BY Id, HeartRateDate;
+
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part3` AS
+SELECT 
+    Id,
+    CAST(TIME AS DATE) AS HeartRateDate,
+    ROUND(AVG(Value), 2) AS AvgDailyHeartRate
+FROM `oos-da-project.fitbit_data.heartrate_seconds_may`
+WHERE DATE(TIME) BETWEEN '2016-04-26' AND '2016-05-02'
+GROUP BY Id, HeartRateDate;
+
+CREATE OR REPLACE TABLE `oos-da-project.fitbit_data.daily_heart_rate_summary_may_part4` AS
+SELECT 
+    Id,
+    CAST(TIME AS DATE) AS HeartRateDate,
+    ROUND(AVG(Value), 2) AS AvgDailyHeartRate
+FROM `oos-da-project.fitbit_data.heartrate_seconds_may`
+WHERE DATE(TIME) BETWEEN '2016-05-03' AND '2016-05-12'
+GROUP BY Id, HeartRateDate;
