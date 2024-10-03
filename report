@@ -1,4 +1,4 @@
-# Bellabeat Data Analysis Report
+Bellabeat Data Analysis Report
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -17,18 +17,48 @@
 
 ## Introduction
 
-This case study explores data from **Bellabeat**, a high-tech company focused on women's health and wellness. This project analyzes user activity, sleep, and heart rate data from April and May 2016 to uncover actionable insights that can enhance Bellabeat’s product offerings. Bellabeat can tailor features and recommendations to optimize user wellness by understanding how activity correlates with sleep and heart health.
+This case study explores data from **Bellabeat**, a high-tech company focused on women's health and wellness. The goal of this project is to analyze user activity, sleep, and heart rate data from April and May 2016 to uncover actionable insights that can enhance Bellabeat’s product offerings. Bellabeat can tailor features and recommendations to optimize user wellness by understanding how activity correlates with sleep and heart health.
+Smart devices like Fitbits, Apple Watches, and Bellabeat devices are increasingly used by individuals to monitor their **daily activity, sleep, and overall wellness**. Understanding trends in this data will help Bellabeat align its product features with the needs of its target market, particularly women who are tech-savvy and health-conscious.
 
 ---
 
 ## Data Sources
-
-The data used for this analysis comes from Fitbit's publically available dataset on Kaggle. This data contains two separate folders: one for the month of
+The data used for this analysis comes from Fitbit's publically available dataset on [Kaggle](https://www.kaggle.com/datasets/arashnic/fitbit). 
+This data contains two separate folders: one for the month of Mar-Apr and the second for Apr-May of 2016.
 
 Data includes:
-- **Activity Data**: Daily step counts, active minutes, and calories burned.
-- **Sleep Data**: Total sleep duration, including minutes asleep, restless, and awake.
-- **Heart Rate Data**: Daily average heart rate measurements.
+| Fitabase Data 3.12.16-4.11.16    | Fitabase Data 4.12.16-5.12.16        |
+|:---------------------------------|:-------------------------------------|
+|dailyActivity_merged.csv          |dailyActivity_merged.csv	      	  |
+|heartrate_seconds_merged.csv	   |dailyCalories_merged.csv	       	  |
+|hourlyCalories_merged.csv         |dailyIntensities_merged.csv	          |
+|hourlyIntensities_merged.csv      |dailySteps_merged.csv		          |
+|hourlySteps_merged.csv            |heartrate_seconds_merged.csv	      |
+|minuteCaloriesNarrow_merged.csv   |hourlyCalories_merged.csv		      |
+|minuteIntensitiesNarrow_merged.csv|hourlyIntensities_merged.csv	      |
+|minuteMETsNarrow_merged.csv       |hourlySteps_merged.csv		  	      |
+|minuteSleep_merged.csv		       |minuteCaloriesNarrow_merged.csv	      |
+|minuteStepsNarrow_merged.csv	   |minuteCaloriesWide_merged.csv	      |
+|weightLogInfo_merged.csv	       |minuteIntensitiesNarrow_merged.csv	  |
+|			                       |minuteIntensitiesWide_merged.csv  	  |
+|			                       |minuteMETsNarrow_merged.csv		  	  |
+|				                   |minuteSleep_merged.csv	          	  |
+|				                   |minuteStepsNarrow_merged.csv      	  |
+|				                   |minuteStepsWide_merged.csv		      |
+|				                   |sleepDay_merged.csv			          |
+|				                   |weightLogInfo_merged.csv	          |
+
+
+The table above shows that there were more metrics tracked in the 2nd month. 
+This month contains more data in both narrow and wide formats for minute-by-minute calories, intensities, sleep, and steps.
+
+I paid closer attention to these specific metrics below:
+- **Daily Activity Data**: Step counts, active minutes, distance traveled, and calories burned.
+- **Minute-Sleep Data**: Total sleep duration, including minutes asleep, restless, and awake.
+- **Seconds-Heart Rate Data**: Heart rate activity by seconds in daily averages.
+
+Analyzing the trends in this data will help Bellabeat understand customer behavior based on how much they move, how well they sleep, and how they recover through heart rate.
+
 
 The data was processed and cleaned using **SQL** within Google BigQuery, and visualized using **Google Sheets**.
 
@@ -37,10 +67,8 @@ The data was processed and cleaned using **SQL** within Google BigQuery, and vis
 ## Objectives
 
 The main objectives of this case study are:
-- To analyze the relationship between user activity (steps) and sleep.
-- To explore how heart rate is affected by both activity and sleep patterns.
-- To identify high-activity users and assess their recovery (sleep and heart rate).
-- To generate actionable insights that Bellabeat can use to improve product features and user engagement.
+- To identify trends in user behavior related to activity, sleep, and heart rate using the public dataset from Fitbit.
+- To apply these findings to create actionable insights that Bellabeat can use to improve product features and enhance user engagement.
 
 ---
 
