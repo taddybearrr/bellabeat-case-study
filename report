@@ -18,7 +18,8 @@ Bellabeat Data Analysis Report
 ## Introduction
 
 This case study explores data from **Bellabeat**, a high-tech company focused on women's health and wellness. The goal of this project is to analyze user activity, sleep, and heart rate data from April and May 2016 to uncover actionable insights that can enhance Bellabeat’s product offerings. Bellabeat can tailor features and recommendations to optimize user wellness by understanding how activity correlates with sleep and heart health.
-Smart devices like Fitbits, Apple Watches, and Bellabeat devices are increasingly used by individuals to monitor their **daily activity, sleep, and overall wellness**. Understanding trends in this data will help Bellabeat align its product features with the needs of its target market, particularly women who are tech-savvy and health-conscious.
+Smart devices like Fitbits, Apple Watches, and Bellabeat devices are increasingly used by individuals to monitor their **daily activity, sleep, and overall wellness**. 
+Understanding trends in this data will help Bellabeat align its product features with the needs of its target market, particularly women who are tech-savvy and health-conscious.
 
 ---
 
@@ -49,13 +50,13 @@ Data includes:
 |				                   |weightLogInfo_merged.csv	          |
 
 
-The table above shows that there were more metrics tracked in the 2nd month. 
+The table above shows that more metrics were tracked in the 2nd month. 
 This month contains more data in both narrow and wide formats for minute-by-minute calories, intensities, sleep, and steps.
 
 I paid closer attention to these specific metrics below:
 - **Daily Activity Data**: Step counts, active minutes, distance traveled, and calories burned.
 - **Minute-Sleep Data**: Total sleep duration, including minutes asleep, restless, and awake.
-- **Seconds-Heart Rate Data**: Heart rate activity by seconds in daily averages.
+- **Seconds-Heart Rate Data**: Daily average heart rate activity by seconds.
 
 Analyzing the trends in this data will help Bellabeat understand customer behavior based on how much they move, how well they sleep, and how they recover through heart rate.
 
@@ -80,7 +81,7 @@ The data was cleaned to handle `NULL` values, incorrect or missing entries, and 
 The key steps in the data cleaning process include:
 - Aggregating daily data for each user.
 - Removing records with incomplete sleep or heart rate data where necessary.
-- Normalizing and scaling the data for visualizations.
+- Normalizing and scaling the data for more effective visualizations and comparisons.
 
 ### 2. SQL Queries
 We ran SQL queries to explore key relationships in the data, such as:
@@ -88,7 +89,8 @@ We ran SQL queries to explore key relationships in the data, such as:
 - The effect of high activity on heart rate.
 - The connection between sleep quality and recovery (via heart rate).
 
-For the detailed SQL queries used in this analysis, please refer to the [analysis folder](../analysis/data_cleaning.sql).
+These queries allowed us to uncover trends in **smart device usage**, particularly around tracking activity and wellness metrics, which are central to Bellabeat's products.
+For detailed SQL queries used in this analysis, please refer to the [analysis folder](../analysis/data_cleaning.sql).
 
 ---
 
@@ -99,7 +101,7 @@ For the detailed SQL queries used in this analysis, please refer to the [analysi
 ![Steps vs. Sleep](../visualizations/steps_vs_sleep.png)
 
 - **Observation**: Users with high daily steps, such as user `4388161847` (11,198 steps), exhibit varying levels of sleep. Some users are highly active but do not get adequate sleep, such as user `7007744171` (65 minutes of sleep).
-- **Insight**: There is no clear correlation between higher steps and increased sleep. This suggests that highly active users may need reminders to balance activity with recovery.
+- **Insight**: The correlation coefficient is approximately -0.10, indicating a weak negative correlation. This suggests that highly active users may not be resting properly, a common trend seen in smart device usage, where activity is often tracked more rigorously than recovery.
   
 ### Activity vs. Heart Rate
 
