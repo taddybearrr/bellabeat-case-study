@@ -90,7 +90,7 @@ We ran SQL queries to explore key relationships in the data, such as:
 - The connection between sleep quality and recovery (via heart rate).
 
 These queries allowed us to uncover trends in **smart device usage**, particularly around tracking activity and wellness metrics, which are central to Bellabeat's products.
-For detailed SQL queries used in this analysis, please refer to the [analysis folder](../analysis/data_cleaning.sql).
+For detailed SQL queries used in this analysis, please refer to the [analysis folder](../analysis/).
 
 ---
 
