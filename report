@@ -100,22 +100,22 @@ For detailed SQL queries used in this analysis, please refer to the [analysis fo
 
 ![Steps vs. Sleep](../visualizations/steps_vs_sleep.png)
 
-- **Observation**: Users with high daily steps, such as user `4388161847` (11,198 steps), exhibit varying levels of sleep. Some users are highly active but do not get adequate sleep, such as user `7007744171` (65 minutes of sleep).
-- **Insight**: The correlation coefficient is approximately -0.10, indicating a weak negative correlation. This suggests that highly active users may not be resting properly, a common trend seen in smart device usage, where activity is often tracked more rigorously than recovery.
+- **Observation**: The correlation coefficient is approximately -0.10, indicating a weak negative correlation, but the relationship between steps and heart rate is not particularly strong. Users with high daily steps, such as user `4388161847` (11,198 steps), exhibit varying levels of sleep. Some users are highly active but do not get adequate sleep, such as user `7007744171` (65 minutes of sleep). 11 rows of data were filtered out due to NULL values contained in AvgDailySleepMinutes. 
+- **Insight**: We can't assume with the current amount of data that highly active users may not be resting properly, but having a larger sample size may show potential in that assumption. It might be a common trend seen in smart device usage, where users may take off their smart device when sleeping resulting in not tracking sleep data.
   
 ### Activity vs. Heart Rate
 
 ![Steps vs. Heart Rate](../visualizations/steps_vs_heart_rate.png)
 
-- **Observation**: Users with higher daily steps generally have lower heart rates, suggesting improved cardiovascular health. For example, users like `5553957443` (8,569 steps, 67.85 bpm) show signs of better fitness compared to less active users.
+- **Observation**: Users with higher daily steps generally have lower heart rates, suggesting improved cardiovascular health. For example, users like `5553957443` (8,569 steps, 67.85 bpm) show signs of better fitness compared to less active users. 11 rows of data were filtered out due to NULL values contained in AvgHeartRate.
 - **Insight**: Regular physical activity is linked to better heart health, but users may not be aware of how their fitness is improving over time.
 
 ### Sleep Quality and Heart Rate
 
 ![Sleep vs. Heart Rate](../visualizations/sleep_vs_heart_rate.png)
 
-- **Observation**: Users who get more sleep tend to have lower heart rates. For instance, user `5577150313` (417 minutes of sleep, 67.63 bpm) shows better recovery compared to users who sleep less.
-- **Insight**: More sleep correlates with improved recovery, as reflected in lower heart rates. This suggests that Bellabeat should emphasize the importance of sleep in overall wellness.
+- **Observation**: The correlation coefficient is approximately -0.28, indicating a weak negative correlation. Users who get more sleep tend to have lower heart rates. For instance, user `5577150313` (417 minutes of sleep, 67.63 bpm) shows better recovery compared to users who sleep less.
+- **Insight**: More sleep may correlate with improved recovery, as reflected in lower heart rates. This suggests that Bellabeat should emphasize the importance of sleep in overall wellness.
 
 ### High-Activity Users
 
@@ -130,7 +130,7 @@ For detailed SQL queries used in this analysis, please refer to the [analysis fo
 
 Based on the analysis, here are the key recommendations for Bellabeat:
 
-1. **Promote Recovery Features**: Users who are highly active often don't get enough sleep. Bellabeat should develop features that encourage recovery by suggesting rest days or providing **sleep optimization tips**.
+1. **Promote Recovery Features**: Highly active users often don't get enough sleep. Bellabeat should develop features that encourage recovery by suggesting rest days or providing **sleep optimization tips**.
    
 2. **Track Heart Health Improvements**: Introduce features that allow users to track **heart rate improvements** over time, showing them how their fitness levels are improving with regular activity.
 
@@ -143,5 +143,10 @@ Based on the analysis, here are the key recommendations for Bellabeat:
 ## Conclusion
 
 This case study provided insights into the relationship between user activity, sleep, and heart rate. The data suggests that while many users are active, they may not be optimizing their recovery, as reflected in inconsistent sleep and heart rate patterns. Bellabeat has the opportunity to enhance its product by focusing on **recovery, heart health tracking,** and **personalized recommendations**, which will provide greater value to users aiming to improve their overall wellness.
+
+### Answers to the Key Questions:
+1. **Trends in smart device usage**: Users primarily track activity and heart rate, with less emphasis on sleep and recovery.
+2. **Application to Bellabeat customers**: Bellabeat can help its customers (tech-savvy women) understand their recovery patterns, encouraging them to prioritize sleep and heart health in addition to tracking activity.
+3. **Influencing Bellabeat’s marketing strategy**: Bellabeat should emphasize **premium features** that focus on recovery, heart rate improvements, and personalized insights in their marketing campaigns, targeting **high-activity users** and wellness-conscious individuals.
 
 For more information on the analysis process and data visualizations, please refer to the [analysis folder](../analysis/) and [visualizations folder](../visualizations/).
