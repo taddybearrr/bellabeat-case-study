@@ -90,7 +90,7 @@ We ran SQL queries to explore key relationships in the data, such as:
 - The connection between sleep quality and recovery (via heart rate).
 
 These queries allowed us to uncover trends in **smart device usage**, particularly around tracking activity and wellness metrics, which are central to Bellabeat's products.
-For detailed SQL queries used in this analysis, please refer to the [analysis folder](../analysis/).
+For detailed SQL queries used in this analysis, please refer to the [analysis folder](../analysis).
 
 ---
 
@@ -98,7 +98,7 @@ For detailed SQL queries used in this analysis, please refer to the [analysis fo
 
 ### Activity vs. Sleep
 
-![Steps vs. Sleep](../visualizations/steps_vs_sleep.png)
+![Steps vs. Sleep](../visualizations/Average_Sleep_and_Steps_by_User.pdf)
 
 - **Observation**: The correlation coefficient is approximately -0.10, indicating a weak negative correlation, but the relationship between steps and heart rate is not particularly strong. Users with high daily steps, such as user `4388161847` (11,198 steps), exhibit varying levels of sleep. Some users are highly active but do not get adequate sleep, such as user `7007744171` (65 minutes of sleep). 11 rows of data were filtered out due to NULL values contained in AvgDailySleepMinutes. 
 - **Insight**: We can't assume with the current amount of data that highly active users may not be resting properly, but having a larger sample size may show potential in that assumption. It might be a common trend seen in smart device usage, where users may take off their smart device when sleeping resulting in not tracking sleep data.
