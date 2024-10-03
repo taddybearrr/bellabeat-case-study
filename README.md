@@ -14,39 +14,28 @@ This project is a data analysis case study for Bellabeat, a high-tech company fo
 This case study explores Fitbit's user data from April and May 2016, focusing on the relationship between user activity (steps), sleep, and heart rate. The goal is to identify key trends and provide actionable recommendations for improving Bellabeat's product features, particularly in terms of recovery and cardiovascular health.
 
 ## Data Sources
-The data used for this analysis comes from Fitbit's publically available dataset on [Kaggle](https://www.kaggle.com/datasets/arashnic/fitbit). It includes:
-Fitabase Data 3.12.16-4.11.16
-- dailyActivity_merged.csv
-- heartrate_seconds_merged.csv
-- hourlyCalories_merged.csv
-- hourlyIntensities_merged.csv
-- hourlySteps_merged.csv
-- minuteCaloriesNarrow_merged.csv
-- minuteIntensitiesNarrow_merged.csv
-- minuteMETsNarrow_merged.csv
-- minuteSleep_merged.csv
-- minuteStepsNarrow_merged.csv
-- weightLogInfo_merged.csv
-  
-Fitabase Data 4.12.16-5.12.16
-- dailyActivity_merged
-- dailyCalories_merged
-- dailyIntensities_merged
-- dailySteps_merged
-- heartrate_seconds_merged
-- hourlyCalories_merged
-- hourlyIntensities_merged
-- hourlySteps_merged
-- minuteCaloriesNarrow_merged
-- minuteCaloriesWide_merged
-- minuteIntensitiesNarrow_merged
-- minuteIntensitiesWide_merged
-- minuteMETsNarrow_merged
-- minuteSleep_merged
-- minuteStepsNarrow_merged
-- minuteStepsWide_merged
-- sleepDay_merged
-- weightLogInfo_merged
+The data used for this analysis comes from Fitbit's publically available dataset on [Kaggle](https://www.kaggle.com/datasets/arashnic/fitbit). 
+Data includes:
+| Fitabase Data 3.12.16-4.11.16    | Fitabase Data 4.12.16-5.12.16        |
+|:---------------------------------|:-------------------------------------|
+|dailyActivity_merged.csv          |dailyActivity_merged.csv	      	  	|
+|heartrate_seconds_merged.csv	     |dailyCalories_merged.csv	      	  	|
+|hourlyCalories_merged.csv         |dailyIntensities_merged.csv	      		|
+|hourlyIntensities_merged.csv      |dailySteps_merged.csv		            	|
+|hourlySteps_merged.csv            |heartrate_seconds_merged.csv	      	|
+|minuteCaloriesNarrow_merged.csv   |hourlyCalories_merged.csv		        	|
+|minuteIntensitiesNarrow_merged.csv|hourlyIntensities_merged.csv	      	|
+|minuteMETsNarrow_merged.csv       |hourlySteps_merged.csv		  	        |
+|minuteSleep_merged.csv		         |minuteCaloriesNarrow_merged.csv	    	|
+|minuteStepsNarrow_merged.csv	     |minuteCaloriesWide_merged.csv	        |
+|weightLogInfo_merged.csv	         |minuteIntensitiesNarrow_merged.csv	 	|
+|			                        	   |minuteIntensitiesWide_merged.csv  	 	|
+|			                        	   |minuteMETsNarrow_merged.csv		  	    |
+|				                           |minuteSleep_merged.csv	          		|
+|				                           |minuteStepsNarrow_merged.csv      		|
+|				                           |minuteStepsWide_merged.csv		      	|
+|				                           |sleepDay_merged.csv			            	|
+|				                           |weightLogInfo_merged.csv	        		|
 
 ## Analysis
 The analysis used SQL queries in Google BigQuery to clean, aggregate, and explore the data. Key analyses include:
