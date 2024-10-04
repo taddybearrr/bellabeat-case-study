@@ -90,7 +90,7 @@ We ran SQL queries to explore key relationships in the data, such as:
 - The connection between sleep quality and recovery (via heart rate).
 
 These queries allowed us to uncover trends in **smart device usage**, particularly around tracking activity and wellness metrics, which are central to Bellabeat's products.
-For detailed SQL queries used in this analysis, please refer to the [analysis folder](../analysis).
+For detailed SQL queries used in this analysis, please refer to the [analysis folder](./analysis).
 
 ---
 
@@ -119,7 +119,7 @@ For detailed SQL queries used in this analysis, please refer to the [analysis fo
 
 ### High-Activity Users
 
-![High-Activity Users](https://github.com/taddybearrr/bellabeat-case-study/blob/cadef2c2dbdeadde264305944d968773c1d0c35b/visualizations/Exploring%20High-Activity%20Users.pdf)
+![High-Activity Users](./visualizations/Average_Sleep_and_Steps_by_User.pdf)
 
 - **Observation**: High-activity users (over 10,000 steps) show varying sleep and heart rate patterns. User `4388161847` logs high steps and gets a decent amount of sleep, while user `7007744171` logs similar steps but gets very little sleep.
 - **Insight**: Even highly active users may not be recovering properly. Bellabeat should help users find a balance between activity and rest for optimal health.
@@ -149,4 +149,4 @@ This case study provided insights into the relationship between user activity, s
 2. **Application to Bellabeat customers**: Bellabeat can help its customers (tech-savvy women) understand their recovery patterns, encouraging them to prioritize sleep and heart health in addition to tracking activity.
 3. **Influencing Bellabeat’s marketing strategy**: Bellabeat should emphasize **premium features** that focus on recovery, heart rate improvements, and personalized insights in their marketing campaigns, targeting **high-activity users** and wellness-conscious individuals.
 
-For more information on the analysis process and data visualizations, please refer to the [analysis folder](../analysis/) and [visualizations folder](../visualizations/).
+For more information on the analysis process and data visualizations, please refer to the [analysis folder](./analysis/) and [visualizations folder](./visualizations/).
