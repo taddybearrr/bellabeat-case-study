@@ -24,7 +24,12 @@ Understanding trends in this data will help Bellabeat align its product features
 ---
 
 ## Data Sources
-The data used for this analysis comes from Fitbit's publically available dataset on [Kaggle](https://www.kaggle.com/datasets/arashnic/fitbit). 
+The data used for this analysis is the FitBit Fitness Tracker Data (CC0: Public Domain license, dataset made available through Mobius) [Kaggle](https://www.kaggle.com/datasets/arashnic/fitbit). This data set contains contains personal fitness tracker from 30 fitbit users. These 30 have consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps, and heart rate that can be used to explore users' habits.
+
+There are some limitations to this dataset:
+- The data dates back from March 2016 to May 2016, which may signify that user habits may not represent the current trends in smart device usage. As this is a case study, we'll approach this project for data analytics practices.
+- There are only 30 user data available. The central limit theorem general rule of n≥30 applies and we can use the t test for statstic reference. However, a larger sample size is preferred for the analysis. While the data tracks many factors in the user activity and sleep, but the sample size is small and most data is recorded during certain days of the week.
+
 This data contains two separate folders: one for the month of Mar-Apr and the second for Apr-May of 2016.
 
 Data includes:
@@ -98,28 +103,28 @@ For detailed SQL queries used in this analysis, please refer to the [analysis fo
 
 ### Activity vs. Sleep
 
-![Steps vs. Sleep](./visualizations/Relationship_Between_Daily_Steps_and_Sleep.png)
+![Steps vs. Sleep](./visualizations/Relationship%20Between%20Daily%20Steps%20and%20Sleep.png)
 
 - **Observation**: The correlation coefficient is approximately -0.10, indicating a weak negative correlation, but the relationship between steps and heart rate is not particularly strong. Users with high daily steps, such as user `4388161847` (11,198 steps), exhibit varying levels of sleep. Some users are highly active but do not get adequate sleep, such as user `7007744171` (65 minutes of sleep). 11 rows of data were filtered out due to NULL values contained in AvgDailySleepMinutes. 
 - **Insight**: We can't assume with the current amount of data that highly active users may not be resting properly, but having a larger sample size may show potential in that assumption. It might be a common trend seen in smart device usage, where users may take off their smart device when sleeping resulting in not tracking sleep data.
   
 ### Activity vs. Heart Rate
 
-![Steps vs. Heart Rate](./visualizations/Comparison_of_Daily_Steps_and_Heart_Rate_Across_Users.png)
+![Steps vs. Heart Rate](./visualizations/Comparison%20of%20Daily%20Steps%20and%20Heart%20Rate%20Across%20Users.png)
 
 - **Observation**: Users with higher daily steps generally have lower heart rates, suggesting improved cardiovascular health. For example, users like `5553957443` (8,569 steps, 67.85 bpm) show signs of better fitness compared to less active users. 11 rows of data were filtered out due to NULL values contained in AvgHeartRate.
 - **Insight**: Regular physical activity is linked to better heart health, but users may not be aware of how their fitness is improving over time.
 
 ### Sleep Quality and Heart Rate
 
-![Sleep vs. Heart Rate](./visualizations/Relationship_Between_Sleep_Duration_and_Heart_Rate.png)
+![Sleep vs. Heart Rate](./visualizations/Relationship%20Between%20Sleep%20Duration%20and%20Heart%20Rate.png)
 
 - **Observation**: The correlation coefficient is approximately -0.28, indicating a weak negative correlation. Users who get more sleep tend to have lower heart rates. For instance, user `5577150313` (417 minutes of sleep, 67.63 bpm) shows better recovery compared to users who sleep less.
 - **Insight**: More sleep may correlate with improved recovery, as reflected in lower heart rates. This suggests that Bellabeat should emphasize the importance of sleep in overall wellness.
 
 ### High-Activity Users
 
-![High-Activity Users](./visualizations/Steps_vs._Sleep_and_Heart_Rate.png)
+![High-Activity Users](./visualizations/Steps%20vs.%20Sleep%20and%20Heart%20Rate.png)
 
 - **Observation**: High-activity users (over 10,000 steps) show varying sleep and heart rate patterns. User `4388161847` logs high steps and gets a decent amount of sleep, while user `7007744171` logs similar steps but gets very little sleep.
 - **Insight**: Even highly active users may not be recovering properly. Bellabeat should help users find a balance between activity and rest for optimal health.
